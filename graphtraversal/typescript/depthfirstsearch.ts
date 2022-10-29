@@ -1,11 +1,11 @@
+import * as a from "../../typescript.ts";
+
 // Depth First Search
 
-import type { Node } from "../../lab2.ts";
-
-function dfs<T>(head: Node<T>, found: (o: T) => boolean): boolean {
+function dfs<T>(head: a.Node<T>, found: (o: T) => boolean): boolean {
   // Recursive function for DFS
   // DFS is often implemented using a Stack (which is recursion)
-  function helper(head: Node<T>) {
+  function helper(head: a.Node<T>) {
     if (head == null) return false;
 
     // Run the helper on all the children

@@ -2,31 +2,36 @@
 
 // Import & Re-export
 
-export { coinchange, coinchange2 } from "./coinchange/brute_force/typescript.ts";
-export { coinchangeDP } from "./coinchange/dynamic_programming/typescript.ts";
+export * from "./coinchange/brute_force/typescript.ts";
+export * from "./coinchange/dynamic_programming/typescript.ts";
 
-export { eggdrop } from "./eggdrop/brute_force/typescript.ts";
-export { eggdropDP } from "./eggdrop/dynamic_programming/typescript.ts";
+export * from "./eggdrop/brute_force/typescript.ts";
+export * from "./eggdrop/dynamic_programming/typescript.ts";
 
-export { integerfactorization } from "./integerfactorization/brute_force/typescript.ts";
-export { integerfactorizationDP } from "./integerfactorization/dynamic_programming/typescript.ts";
+export * from "./integerfactorization/brute_force/typescript.ts";
+export * from "./integerfactorization/dynamic_programming/typescript.ts";
 
-export { lcs } from "./longestcommonsubsequence/brute_force/typescript.ts";
-export { lcsDP } from "./longestcommonsubsequence/dynamic_programming/typescript.ts";
+export * from "./longestcommonsubsequence/brute_force/typescript.ts";
+export * from "./longestcommonsubsequence/dynamic_programming/typescript.ts";
 
-export { lis } from "./longestincreasingsubsequence/brute_force/typescript.ts";
-export { lisDP } from "./longestincreasingsubsequence/dynamic_programming/typescript.ts";
+export * from "./longestincreasingsubsequence/brute_force/typescript.ts";
+export * from "./longestincreasingsubsequence/dynamic_programming/typescript.ts";
 
-export { kruskal } from "./minimumspanningtree/kruskal/typescript.ts";
-export { prim } from "./minimumspanningtree/prim/typescript.ts";
+export * from "./minimumspanningtree/kruskal/typescript.ts";
+export * from "./minimumspanningtree/prim/typescript.ts";
 
-export { bellmanford } from "./shortestpath/bellmanford/typescript.ts";
-export { dijkstra } from "./shortestpath/dijkstra/typescript.ts";
+export * from "./shortestpath/bellmanford/typescript.ts";
+export * from "./shortestpath/dijkstra/typescript.ts";
 
-export { mergesort } from "./sort/mergesort/typescript.ts";
-export { quicksort } from "./sort/quicksort/typescript.ts";
-export { heapsort } from "./sort/heapsort/typescript.ts";
-export { selectionsort } from "./sort/selectionsort/typescript.ts";
+export * from "./sort/mergesort/typescript.ts";
+export * from "./sort/quicksort/typescript.ts";
+export * from "./sort/heapsort/typescript.ts";
+export * from "./sort/selectionsort/typescript.ts";
+
+export * from "./binarysearch/typescript.ts";
+
+export * from "./graphtraversal/typescript/breadthfirstsearch.ts";
+export * from "./graphtraversal/typescript/depthfirstsearch.ts";
 
 // Types
 
@@ -52,3 +57,7 @@ type Node<T> = {
 };
 
 export type { Edge, Graph, Node, Vertex };
+
+// Deno
+
+export * from "https://deno.land/std@0.160.0/testing/asserts.ts";

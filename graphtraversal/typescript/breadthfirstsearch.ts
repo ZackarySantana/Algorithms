@@ -1,6 +1,6 @@
 // Breadth First Search
 
-import type { Node } from "../../lab2.ts";
+import type { Node } from "../../typescript.ts";
 
 function bfs<T>(head: Node<T>, found: (o: T) => boolean): boolean {
   // BFS is implemented by doing a queue and doing first in, first out

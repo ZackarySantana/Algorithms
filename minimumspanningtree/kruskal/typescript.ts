@@ -1,6 +1,6 @@
 // Kruskal’s Algorithm
 
-import type { Graph } from "../../lab2.ts";
+import type { Graph } from "../../typescript.ts";
 
 function kruskal(graph: Graph): Graph {
   // Our forest starts off with every vertex being its own graph

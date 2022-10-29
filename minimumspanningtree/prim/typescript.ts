@@ -1,6 +1,6 @@
-// 12. Prim’s Algorithm
+// Prim’s Algorithm
 
-import type { Graph } from "../../lab2.ts";
+import type { Graph } from "../../typescript.ts";
 
 function prim(graph: Graph): Graph {
   // This will store our minimum spanning tree

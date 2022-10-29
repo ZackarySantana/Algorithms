@@ -1,9 +1,8 @@
 // 13. Bellman Ford & 14. Dijkstra
-
-import { Graph } from "../lab2.ts";
+;
 import * as a from "../typescript.ts";
 
-const ShortestPathBench = (graph: Graph, group: string) => {
+const ShortestPathBench = (graph: a.Graph, group: string) => {
   Deno.bench("Bellman Ford's - " + group, {
     group: "Shortest Path " + group,
   }, () => {
@@ -24,7 +23,7 @@ const createRandomGraph = (
   edgeSize: number,
   maxWeight: number,
 ) => {
-  const g = { vertexes: [], edges: [] } as Graph;
+  const g = { vertexes: [], edges: [] } as a.Graph;
 
   for (let i = 0; i < vertexSize; ++i) {
     g.vertexes.push({ key: String(i) });

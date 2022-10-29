@@ -1,21 +1,21 @@
-import * as lab2 from "./lab2.ts";
+// Longest Increasing Subsequence
 
-// 6. Longest Increasing Subsequence
+import * as a from "../typescript.ts";
 
 const LISBench = (nums: number[], group: string) => {
-  Deno.bench(
+  a.bench(
     "LIS Brute Force - " + group,
     { group: "Longest Increasing Subsequence " + group },
     () => {
-      lab2.lis_Brute(nums);
+      a.lis(nums);
     },
   );
 
-  Deno.bench(
+  a.bench(
     "LIS DP Solution - " + group,
     { group: "Longest Increasing Subsequence " + group },
     () => {
-      lab2.lis_DP(nums);
+      a.lisDP(nums);
     },
   );
 };

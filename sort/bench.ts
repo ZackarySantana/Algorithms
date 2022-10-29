@@ -1,8 +1,8 @@
-import * as lab2 from "./lab2.ts";
+// Sorts
+
+import * as a from "../typescript.ts";
 
 const asc = (a: number, b: number) => a - b;
-
-// 1. Quicksort & 2. Mergesort & 7. Heap Sort
 
 const SortBench = (arr: number[], group: string) => {
   Deno.bench(
@@ -14,15 +14,15 @@ const SortBench = (arr: number[], group: string) => {
   );
 
   Deno.bench("Quicksort - " + group, { group: "Sorting " + group }, () => {
-    lab2.quicksort(arr, asc);
+    a.quicksort(arr, asc);
   });
 
   Deno.bench("Mergesort - " + group, { group: "Sorting " + group }, () => {
-    lab2.mergesort(arr, asc);
+    a.mergesort(arr, asc);
   });
 
   Deno.bench("Heap Sort - " + group, { group: "Sorting " + group }, () => {
-    lab2.heapsort(arr, asc);
+    a.heapsort(arr, asc);
   });
 
   // If the array is too big, this sort just takes WAY too long
@@ -31,7 +31,7 @@ const SortBench = (arr: number[], group: string) => {
       "Selection Sort - " + group,
       { group: "Sorting " + group },
       () => {
-        lab2.selectionsort(arr, asc);
+        a.selectionsort(arr, asc);
       },
     );
   }

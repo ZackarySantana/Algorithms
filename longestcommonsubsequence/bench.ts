@@ -1,21 +1,21 @@
-import * as lab2 from "./lab2.ts";
+// Longest Common Subsequence
 
-// 5. Longest Common Subsequence
+import * as a from "../typescript.ts";
 
 const LCSBench = (s1: string, s2: string, group: string) => {
-  Deno.bench(
+  a.bench(
     "LCS Brute Force - " + group,
     { group: "Longest Common Subsequence " + group },
     () => {
-      lab2.lcs_Brute(s1, s2);
+      a.lcs(s1, s2);
     },
   );
 
-  Deno.bench(
+  a.bench(
     "LCS DP Solution - " + group,
     { group: "Longest Common Subsequence " + group },
     () => {
-      lab2.lcs_DP(s1, s2);
+      a.lcsDP(s1, s2);
     },
   );
 };

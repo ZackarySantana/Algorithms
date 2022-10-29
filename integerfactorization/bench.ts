@@ -1,25 +1,23 @@
-import * as lab2 from "./lab2.ts";
+// Integer Factorization
 
-const asc = (a: number, b: number) => a - b;
-
-// 15. Integer Factorization
+import * as a from "../typescript.ts";
 
 const IntegerFactorizationBench = (num: () => number, group: string) => {
   if (group != "Stackoverflow") {
-    Deno.bench(
+    a.bench(
       "Integer Factorization DP Solution - " + group,
       { group: "Coin Change - " + group },
       () => {
-        lab2.integerfactorization_DP(num());
+        a.integerfactorizationDP(num());
       },
     );
   }
 
-  Deno.bench(
+  a.bench(
     "Integer Factorization Brute Force - " + group,
     { group: "Coin Change - " + group },
     () => {
-      lab2.integerfactorization_Brute(num());
+      a.integerfactorization(num());
     },
   );
 };

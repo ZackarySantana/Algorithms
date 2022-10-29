@@ -1,31 +1,31 @@
-import * as lab2 from "./lab2.ts";
+// Coin Change
 
-// 4. Coin Change
+import * as a from "../typescript.ts";
 
 const CoinChangeBench = (coins: number[], sum: number, group: string) => {
   if (group != "Stackoverflow") {
-    Deno.bench(
+    a.bench(
       "Coin Change Brute Force Pass Index - " + group,
       { group: "Coin Change - " + group },
       () => {
-        lab2.coinChange_Brute(coins, sum);
+        a.coinchange(coins, sum);
       },
     );
 
-    Deno.bench(
+    a.bench(
       "Coin Change Brute Force Pass Array - " + group,
       { group: "Coin Change - " + group },
       () => {
-        lab2.coinChange_Brute2(coins, sum);
+        a.coinchange2(coins, sum);
       },
     );
   }
 
-  Deno.bench(
+  a.bench(
     "Coin Change DP Solution - " + group,
     { group: "Coin Change - " + group },
     () => {
-      lab2.coinChange_DP(coins, sum);
+      a.coinchangeDP(coins, sum);
     },
   );
 };

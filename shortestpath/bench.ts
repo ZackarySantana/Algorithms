@@ -1,20 +1,20 @@
-import * as lab2 from "./lab2.ts";
-import type { Graph } from "./lab2.ts";
+// 13. Bellman Ford & 14. Dijkstra
 
-// 1. Quicksort & 2. Mergesort & 7. Heap Sort
+import { Graph } from "../lab2.ts";
+import * as a from "../typescript.ts";
 
 const ShortestPathBench = (graph: Graph, group: string) => {
-  Deno.bench("Bellman Ford's - " + group, {
+  a.bench("Bellman Ford's - " + group, {
     group: "Shortest Path " + group,
   }, () => {
-    lab2.bellmanFord(graph, graph.vertexes[0]);
+    a.bellmanford(graph, graph.vertexes[0]);
   });
 
-  Deno.bench(
+  a.bench(
     "Dijkstra's - " + group,
     { group: "Shortest Path " + group },
     () => {
-      lab2.dijkstra(graph, graph.vertexes[0]);
+      a.dijkstra(graph, graph.vertexes[0]);
     },
   );
 };

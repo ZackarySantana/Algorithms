@@ -1,20 +1,19 @@
-import * as lab2 from "./lab2.ts";
-import type { Graph } from "./lab2.ts";
+// Minimum Spanning Tree
 
-// 1. Quicksort & 2. Mergesort & 7. Heap Sort
+import * as a from "../typescript.ts";
 
-const MinimumSpanningTreeBench = (graph: Graph, group: string) => {
-  Deno.bench("Kruskal's - " + group, {
+const MinimumSpanningTreeBench = (graph: a.Graph, group: string) => {
+  a.bench("Kruskal's - " + group, {
     group: "Minimum Spanning Tree " + group,
   }, () => {
-    lab2.kruskal(graph);
+    a.kruskal(graph);
   });
 
-  Deno.bench(
+  a.bench(
     "Prim's - " + group,
     { group: "Minimum Spanning Tree " + group },
     () => {
-      lab2.prim(graph);
+      a.prim(graph);
     },
   );
 };
@@ -24,7 +23,7 @@ const createRandomGraph = (
   edgeSize: number,
   maxWeight: number,
 ) => {
-  const g = { vertexes: [], edges: [] } as Graph;
+  const g = { vertexes: [], edges: [] } as a.Graph;
 
   for (let i = 0; i < vertexSize; ++i) {
     g.vertexes.push({ key: String(i) });

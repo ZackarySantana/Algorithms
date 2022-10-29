@@ -1,23 +1,23 @@
-import * as lab2 from "./lab2.ts";
+// Egg Dropping
 
-// 3. Egg Dropping
+import * as a from "../typescript.ts";
 
 const EggDroppingBench = (floors: number, eggs: number, group: string) => {
   if (eggs == 2) {
-    Deno.bench(
+    a.bench(
       "Egg Dropping Math Equation - " + group,
       { group: "Egg Dropping " + group },
       () => {
-        lab2.eggDropping(floors);
+        a.eggdrop(floors);
       },
     );
   }
 
-  Deno.bench(
+  a.bench(
     "Egg Dropping DP Solution - " + group,
     { group: "Egg Dropping " + group },
     () => {
-      lab2.eggDropping_DP(eggs, floors);
+      a.eggdropDP(eggs, floors);
     },
   );
 };

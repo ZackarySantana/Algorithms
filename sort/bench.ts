@@ -5,7 +5,7 @@ import * as a from "../typescript.ts";
 const asc = (a: number, b: number) => a - b;
 
 const SortBench = (arr: number[], group: string) => {
-  Deno.bench(
+  a.bench(
     "Standard Library - " + group,
     { group: "Sorting " + group },
     () => {
@@ -13,21 +13,21 @@ const SortBench = (arr: number[], group: string) => {
     },
   );
 
-  Deno.bench("Quicksort - " + group, { group: "Sorting " + group }, () => {
+  a.bench("Quicksort - " + group, { group: "Sorting " + group }, () => {
     a.quicksort(arr, asc);
   });
 
-  Deno.bench("Mergesort - " + group, { group: "Sorting " + group }, () => {
+  a.bench("Mergesort - " + group, { group: "Sorting " + group }, () => {
     a.mergesort(arr, asc);
   });
 
-  Deno.bench("Heap Sort - " + group, { group: "Sorting " + group }, () => {
+  a.bench("Heap Sort - " + group, { group: "Sorting " + group }, () => {
     a.heapsort(arr, asc);
   });
 
   // If the array is too big, this sort just takes WAY too long
   if (arr.length <= 100000) {
-    Deno.bench(
+    a.bench(
       "Selection Sort - " + group,
       { group: "Sorting " + group },
       () => {

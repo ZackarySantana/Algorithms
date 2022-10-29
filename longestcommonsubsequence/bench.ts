@@ -3,7 +3,7 @@
 import * as a from "../typescript.ts";
 
 const LCSBench = (s1: string, s2: string, group: string) => {
-  a.bench(
+  Deno.bench(
     "LCS Brute Force - " + group,
     { group: "Longest Common Subsequence " + group },
     () => {
@@ -11,7 +11,7 @@ const LCSBench = (s1: string, s2: string, group: string) => {
     },
   );
 
-  a.bench(
+  Deno.bench(
     "LCS DP Solution - " + group,
     { group: "Longest Common Subsequence " + group },
     () => {

@@ -52,7 +52,3 @@ type Node<T> = {
 };
 
 export type { Edge, Graph, Node, Vertex };
-
-// Deno
-
-export { bench } from "https://raw.githubusercontent.com/denoland/deno/v1.27.0/cli/dts/lib.deno.unstable.d.ts";

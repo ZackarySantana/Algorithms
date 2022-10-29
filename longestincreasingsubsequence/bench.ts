@@ -3,7 +3,7 @@
 import * as a from "../typescript.ts";
 
 const LISBench = (nums: number[], group: string) => {
-  a.bench(
+  Deno.bench(
     "LIS Brute Force - " + group,
     { group: "Longest Increasing Subsequence " + group },
     () => {
@@ -11,7 +11,7 @@ const LISBench = (nums: number[], group: string) => {
     },
   );
 
-  a.bench(
+  Deno.bench(
     "LIS DP Solution - " + group,
     { group: "Longest Increasing Subsequence " + group },
     () => {

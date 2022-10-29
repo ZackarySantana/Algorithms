@@ -4,7 +4,7 @@ import * as a from "../typescript.ts";
 
 const EggDroppingBench = (floors: number, eggs: number, group: string) => {
   if (eggs == 2) {
-    a.bench(
+    Deno.bench(
       "Egg Dropping Math Equation - " + group,
       { group: "Egg Dropping " + group },
       () => {
@@ -13,7 +13,7 @@ const EggDroppingBench = (floors: number, eggs: number, group: string) => {
     );
   }
 
-  a.bench(
+  Deno.bench(
     "Egg Dropping DP Solution - " + group,
     { group: "Egg Dropping " + group },
     () => {

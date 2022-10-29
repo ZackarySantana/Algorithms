@@ -4,7 +4,7 @@ import * as a from "../typescript.ts";
 
 const IntegerFactorizationBench = (num: () => number, group: string) => {
   if (group != "Stackoverflow") {
-    a.bench(
+    Deno.bench(
       "Integer Factorization DP Solution - " + group,
       { group: "Coin Change - " + group },
       () => {
@@ -13,7 +13,7 @@ const IntegerFactorizationBench = (num: () => number, group: string) => {
     );
   }
 
-  a.bench(
+  Deno.bench(
     "Integer Factorization Brute Force - " + group,
     { group: "Coin Change - " + group },
     () => {

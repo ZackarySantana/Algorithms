@@ -4,13 +4,13 @@ import { Graph } from "../lab2.ts";
 import * as a from "../typescript.ts";
 
 const ShortestPathBench = (graph: Graph, group: string) => {
-  a.bench("Bellman Ford's - " + group, {
+  Deno.bench("Bellman Ford's - " + group, {
     group: "Shortest Path " + group,
   }, () => {
     a.bellmanford(graph, graph.vertexes[0]);
   });
 
-  a.bench(
+  Deno.bench(
     "Dijkstra's - " + group,
     { group: "Shortest Path " + group },
     () => {

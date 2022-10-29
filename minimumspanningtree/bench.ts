@@ -3,13 +3,13 @@
 import * as a from "../typescript.ts";
 
 const MinimumSpanningTreeBench = (graph: a.Graph, group: string) => {
-  a.bench("Kruskal's - " + group, {
+  Deno.bench("Kruskal's - " + group, {
     group: "Minimum Spanning Tree " + group,
   }, () => {
     a.kruskal(graph);
   });
 
-  a.bench(
+  Deno.bench(
     "Prim's - " + group,
     { group: "Minimum Spanning Tree " + group },
     () => {

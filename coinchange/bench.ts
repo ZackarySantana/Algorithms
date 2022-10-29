@@ -4,7 +4,7 @@ import * as a from "../typescript.ts";
 
 const CoinChangeBench = (coins: number[], sum: number, group: string) => {
   if (group != "Stackoverflow") {
-    a.bench(
+    Deno.bench(
       "Coin Change Brute Force Pass Index - " + group,
       { group: "Coin Change - " + group },
       () => {
@@ -12,7 +12,7 @@ const CoinChangeBench = (coins: number[], sum: number, group: string) => {
       },
     );
 
-    a.bench(
+    Deno.bench(
       "Coin Change Brute Force Pass Array - " + group,
       { group: "Coin Change - " + group },
       () => {
@@ -21,7 +21,7 @@ const CoinChangeBench = (coins: number[], sum: number, group: string) => {
     );
   }
 
-  a.bench(
+  Deno.bench(
     "Coin Change DP Solution - " + group,
     { group: "Coin Change - " + group },
     () => {

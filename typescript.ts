@@ -30,8 +30,8 @@ export * from "./sort/selectionsort/typescript.ts";
 
 export * from "./binarysearch/typescript.ts";
 
-export * from "./graphtraversal/typescript/breadthfirstsearch.ts";
-export * from "./graphtraversal/typescript/depthfirstsearch.ts";
+export * from "./graphtraversal/breadthfirstsearch/typescript.ts";
+export * from "./graphtraversal/depthfirstsearch/typescript.ts";
 
 // Types
 

@@ -1,24 +1,30 @@
-# Black        0;30     Dark Gray     1;30
-# Red          0;31     Light Red     1;31
-# Green        0;32     Light Green   1;32
-# Brown/Orange 0;33     Yellow        1;33
-# Blue         0;34     Light Blue    1;34
-# Purple       0;35     Light Purple  1;35
-# Cyan         0;36     Light Cyan    1;36
-# Light Gray   0;37     White         1;37
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;33m'
-YELLOW='\033[1;33m'
-RESET='\033[0;0m'
+#!/bin/bash
 
-benchmarks="./benchmark_results/"
+source utils.sh
 
-mkdir -p $benchmarks
+# ts_bench ${folder name}
+function ts_bench {
+    echo -e "${YELLOW}Running Typescript \"${RED}${1}${YELLOW}\" benchmarks${RESET}"
+    typescript_benchmark=$(deno bench --unstable ${1}/benchmarks/typescript.bench.ts | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g")
+    echo "${typescript_benchmark}" > "${benchmark_dir}/${1}.typescript.log"
+    echo -e "${GREEN}Finished Typescript benchmarks (inside ${benchmark_dir})${RESET}"
+}
 
-for benchmark in "$@" 
-do
-    echo -e "${YELLOW}Running Typescript \"${RED}${benchmark}${YELLOW}\" benchmarks${RESET}"
-    typescript_benchmark=$(deno bench --unstable $benchmark/benchmarks/)
-    typescript_benchmark > "$benchmarks/${benchmark}.ts"
-done
+mkdir -p ${benchmark_dir}
+
+function benchmarks {
+    for benchmark in "$@" 
+    do
+        if [[ " ${types[*]} " =~ " ${benchmark} " ]]; then
+            ts_bench $benchmark
+        else
+            echo -e "${RED}Skipping $benchmark. NOT FOUND${RESET}"
+        fi
+    done
+}
+
+if [ $# -eq 0 ]; then
+    benchmarks ${types[@]}
+else 
+    benchmarks $@
+fi

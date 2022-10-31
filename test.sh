@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source utils/constants.sh
+source utils/languages.sh
 
 # run_test ${Language} ${Test name} ${Test command} ${Failed keyword}
 function run_test {
@@ -15,10 +16,6 @@ function run_test {
     fi
 }
 
-all=1
-typescript=0
-java=0
-
 function tests {
     for test in "$@" 
     do
@@ -31,28 +28,6 @@ function tests {
         fi
     done
 }
-
-while getopts ":l:" opt; do
-    case $opt in
-        l)
-            echo -e "${YELLOW}Only testing languages: '$OPTARG'${RESET}"
-            all=0
-            for i in $OPTARG; do
-                if [ ${i,,} = "typescript" ]; then
-                    typescript=1
-                elif [ ${i,,} = "java" ]; then
-                    java=1
-                fi
-            done
-        ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            exit 1
-        ;;
-    esac
-done
-
-shift $(($OPTIND - 1))
 
 if [ $# -eq 0 ]; then
     tests ${types[@]}

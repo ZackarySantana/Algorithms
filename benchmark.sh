@@ -1,14 +1,7 @@
 #!/bin/bash
 
 source utils/constants.sh
-
-# ts_bench ${folder name}
-function ts_bench {
-    echo -e "${YELLOW}Running Typescript \"${RED}${1}${YELLOW}\" benchmarks${RESET}"
-    typescript_benchmark=$(deno bench --unstable ${1}/benchmarks/typescript.bench.ts | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g")
-    echo "${typescript_benchmark}" > "${benchmark_dir}/${1}.typescript.log"
-    echo -e "${GREEN}Finished Typescript benchmarks (inside ${benchmark_dir})${RESET}"
-}
+source utils/languages.sh
 
 # run_benchmark ${Language} ${Benchmark name} ${Benchmark command}
 function run_benchmark {
@@ -17,12 +10,6 @@ function run_benchmark {
     echo "${typescript_benchmark}" > "${benchmark_dir}/${2}.${1,,}.log"
     echo -e "${GREEN}Finished ${1} benchmarks (inside ${benchmark_dir})${RESET}"
 }
-
-mkdir -p ${benchmark_dir}
-
-all=1
-typescript=0
-java=0
 
 function benchmarks {
     for benchmark in "$@" 
@@ -37,28 +24,7 @@ function benchmarks {
     done
 }
 
-while getopts ":l:" opt; do
-    case $opt in
-        l)
-            echo -e "${YELLOW}Only testing languages: '$OPTARG'${RESET}"
-            all=0
-            for i in $OPTARG; do
-                if [ ${i,,} = "typescript" ]; then
-                    typescript=1
-                elif [ ${i,,} = "java" ]; then
-                    java=1
-                fi
-            done
-        ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            exit 1
-        ;;
-    esac
-done
-
-shift $(($OPTIND - 1))
-
+mkdir -p ${benchmark_dir}
 if [ $# -eq 0 ]; then
     benchmarks ${types[@]}
 else

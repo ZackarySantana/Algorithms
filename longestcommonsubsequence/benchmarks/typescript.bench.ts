@@ -1,6 +1,6 @@
 // Longest Common Subsequence
 
-import * as a from "../typescript.ts";
+import * as a from "../../typescript.ts";
 
 const LCSBench = (s1: string, s2: string, group: string) => {
   Deno.bench(

@@ -1,6 +1,6 @@
 // Egg Dropping
 
-import * as a from "../typescript.ts";
+import * as a from "../../typescript.ts";
 
 const EggDroppingBench = (floors: number, eggs: number, group: string) => {
   if (eggs == 2) {

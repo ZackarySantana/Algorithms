@@ -1,19 +1,19 @@
-// Minimum Spanning Tree
+// 13. Bellman Ford & 14. Dijkstra
+;
+import * as a from "../../typescript.ts";
 
-import * as a from "../typescript.ts";
-
-const MinimumSpanningTreeBench = (graph: a.Graph, group: string) => {
-  Deno.bench("Kruskal's - " + group, {
-    group: "Minimum Spanning Tree " + group,
+const ShortestPathBench = (graph: a.Graph, group: string) => {
+  Deno.bench("Bellman Ford's - " + group, {
+    group: "Shortest Path " + group,
   }, () => {
-    a.kruskal(graph);
+    a.bellmanford(graph, graph.vertexes[0]);
   });
 
   Deno.bench(
-    "Prim's - " + group,
-    { group: "Minimum Spanning Tree " + group },
+    "Dijkstra's - " + group,
+    { group: "Shortest Path " + group },
     () => {
-      a.prim(graph);
+      a.dijkstra(graph, graph.vertexes[0]);
     },
   );
 };
@@ -53,12 +53,12 @@ const createRandomGraph = (
   return g;
 };
 
-MinimumSpanningTreeBench(createRandomGraph(10, 15, 5), "10 vertexes, 15 edges");
-MinimumSpanningTreeBench(
+ShortestPathBench(createRandomGraph(10, 15, 5), "10 vertexes, 15 edges");
+ShortestPathBench(
   createRandomGraph(100, 500, 5),
   "100 vertexes, 500 edges",
 );
-MinimumSpanningTreeBench(
+ShortestPathBench(
   createRandomGraph(1000, 50000, 5),
   "1000 vertexes, 50000 edges",
 );

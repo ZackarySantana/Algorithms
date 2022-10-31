@@ -1,6 +1,6 @@
 // Coin Change
 
-import * as a from "../typescript.ts";
+import * as a from "../../typescript.ts";
 
 const CoinChangeBench = (coins: number[], sum: number, group: string) => {
   if (group != "Stackoverflow") {

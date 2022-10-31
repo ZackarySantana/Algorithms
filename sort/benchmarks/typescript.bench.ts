@@ -1,6 +1,6 @@
 // Sorts
 
-import * as a from "../typescript.ts";
+import * as a from "../../typescript.ts";
 
 const asc = (a: number, b: number) => a - b;
 

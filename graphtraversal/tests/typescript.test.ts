@@ -1,4 +1,4 @@
-import * as a from "../../typescript.ts";
+import * as a from "../../utils/utils.ts";
 
 // Breadth First Search
 

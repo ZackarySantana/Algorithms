@@ -1,6 +1,6 @@
 // Longest Increasing Subsequence
 
-import * as a from "../../typescript.ts";
+import * as a from "../../utils/utils.ts";
 
 const LISBench = (nums: number[], group: string) => {
   Deno.bench(

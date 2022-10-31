@@ -1,6 +1,6 @@
 // 13. Bellman Ford & 14. Dijkstra
 ;
-import * as a from "../../typescript.ts";
+import * as a from "../../utils/utils.ts";
 
 const ShortestPathBench = (graph: a.Graph, group: string) => {
   Deno.bench("Bellman Ford's - " + group, {

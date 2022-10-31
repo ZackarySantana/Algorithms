@@ -1,6 +1,6 @@
 // Minimum Spanning Tree
 
-import * as a from "../../typescript.ts";
+import * as a from "../../utils/utils.ts";
 
 const MinimumSpanningTreeBench = (graph: a.Graph, group: string) => {
   Deno.bench("Kruskal's - " + group, {

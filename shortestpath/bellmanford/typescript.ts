@@ -1,6 +1,6 @@
 // 13. Bellman Ford Algorithm
 
-import type { Graph, Vertex } from "../../typescript.ts";
+import type { Graph, Vertex } from "../../utils/utils.ts";
 
 function bellmanford(graph: Graph, source: Vertex) {
   const verts = graph.vertexes;

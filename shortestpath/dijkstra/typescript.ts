@@ -1,6 +1,6 @@
 // Dijkstra Algorithm
 
-import type { Graph, Vertex } from "../../typescript.ts";
+import type { Graph, Vertex } from "../../utils/utils.ts";
 
 function dijkstra(graph: Graph, source: Vertex) {
   // Originally, all vertexes are unvisited and edges are not used

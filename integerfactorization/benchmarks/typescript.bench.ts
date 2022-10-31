@@ -1,6 +1,6 @@
 // Integer Factorization
 
-import * as a from "../../typescript.ts";
+import * as a from "../../utils/utils.ts";
 
 const IntegerFactorizationBench = (num: () => number, group: string) => {
   if (group != "Stackoverflow") {

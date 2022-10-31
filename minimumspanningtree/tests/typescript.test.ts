@@ -1,4 +1,4 @@
-import * as lib from "../../typescript.ts";
+import * as lib from "../../utils/utils.ts";
 
 // vertexes : a , b , c , d , e , f
 // edges    : ab, bc, ad, cf, ef

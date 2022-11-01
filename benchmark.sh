@@ -6,9 +6,10 @@ source utils/languages.sh
 # run_benchmark ${Language} ${Benchmark name} ${Benchmark command}
 function run_benchmark {
     echo -e "${YELLOW}Running $1 ${RESET}${2}${YELLOW} benchmarks${RESET}"
-    typescript_benchmark=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g")
-    echo "${typescript_benchmark}" > "${benchmark_dir}/${2}.${1,,}.log"
-    echo -e "${GREEN}Finished ${1} benchmarks (inside ${benchmark_dir})${RESET}"
+    benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g")
+    mkdir -p ${benchmark_dir}/${1,,}
+    echo "${benchmark_results}" > "${benchmark_dir}/${1,,}/${2,,}.log"
+    echo -e "${GREEN}Finished ${1} benchmarks (inside ${benchmark_dir}/${1})${RESET}"
 }
 
 function benchmarks {
@@ -24,7 +25,6 @@ function benchmarks {
     done
 }
 
-mkdir -p ${benchmark_dir}
 if [ $# -eq 0 ]; then
     benchmarks ${types[@]}
 else

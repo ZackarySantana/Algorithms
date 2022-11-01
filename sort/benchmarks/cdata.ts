@@ -1,4 +1,9 @@
-import { numberWithCommas, writeFile } from "../../utils/utils.ts";
+import { numberWithCommas, writeDataFile } from "../../utils/utils.ts";
+
+export type SortData = {
+  group: string;
+  arr: number[];
+}
 
 const createRandomDataEntry = (size: number, range: number) => {
   const arr = [] as number[];
@@ -6,14 +11,14 @@ const createRandomDataEntry = (size: number, range: number) => {
     arr.push(Math.floor(Math.random() * range));
   }
   return {
-    name: `${numberWithCommas(size)} elements, ${
+    group: `${numberWithCommas(size)} elements, ${
       numberWithCommas(range)
     } range`,
-    data: arr,
-  };
+    arr,
+  } as SortData;
 };
 
-writeFile(`${Deno.args.length > 0 ? Deno.args.join(".") : "data.json"}`, [
+writeDataFile([
   createRandomDataEntry(10, 5),
   createRandomDataEntry(1000, 100),
   createRandomDataEntry(100000, 10000),

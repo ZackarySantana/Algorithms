@@ -62,11 +62,21 @@ export type { Edge, Graph, Node, Vertex };
 
 import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
 
-export function writeFile(filePath: string, o: unknown) {
+function getDataFileName() {
+  return Deno.args.length > 0 ? Deno.args.join(".") : "data.json";
+}
+
+export function writeDataFile(o: unknown) {
   const mainModuleDir = path.dirname(path.fromFileUrl(Deno.mainModule));
   Deno.chdir(mainModuleDir);
 
-  Deno.writeTextFileSync(filePath, JSON.stringify(o));
+  Deno.writeTextFileSync(getDataFileName(), JSON.stringify(o));
+}
+
+export function readDataFile() {
+  const mainModuleDir = path.resolve(path.dirname(path.fromFileUrl(Deno.mainModule)));
+  Deno.chdir(mainModuleDir);
+  return Deno.readTextFileSync(getDataFileName())
 }
 
 // Misc

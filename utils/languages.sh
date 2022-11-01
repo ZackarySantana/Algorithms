@@ -20,7 +20,7 @@ while getopts ":l:n:" opt; do
             done
         ;;
         n)
-            echo -e "${YELLOW}Printing to file: '$OPTARG'${RESET}"
+            echo -e "${YELLOW}Using file: '$OPTARG'${RESET}"
             data_filename=$OPTARG
         ;;
         \?)

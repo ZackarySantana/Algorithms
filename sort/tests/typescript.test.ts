@@ -15,6 +15,7 @@ Deno.test(async function quicksort(t) {
 
     a.assertEquals(sorted, arr);
     a.assertEquals(sorted2, arr);
+    a.assertEquals(false, true);
   });
 
   await t.step("desc", () => {

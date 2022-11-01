@@ -1,10 +1,11 @@
 // Sorts
 
 import * as a from "../../utils/utils.ts";
+import { SortData } from "./cdata.ts";
 
 const asc = (a: number, b: number) => a - b;
 
-const SortBench = (arr: number[], group: string) => {
+const SortBench = ({arr, group}: {arr: number[], group: string;}) => {
   Deno.bench(
     "Standard Library - " + group,
     { group: "Sorting " + group },
@@ -36,27 +37,9 @@ const SortBench = (arr: number[], group: string) => {
     );
   }
 };
+const data = JSON.parse(a.readDataFile()) as SortData[];
 
-const createRandomArray = (size: number, range: number) => {
-  const arr = [] as number[];
-  for (let i = 0; i < size; ++i) {
-    arr.push(Math.floor(Math.random() * range));
-  }
-  return arr;
-};
-
-// const text = await Deno.readTextFile("./data.json");
-// console.log(JSON.parse(text));
-
-SortBench(createRandomArray(10, 5), "10 ele, 5 range");
-SortBench(createRandomArray(1000, 100), "1000 ele, 100 range");
-SortBench(createRandomArray(100000, 10000), "100,000 ele, 10,000 range");
-SortBench(createRandomArray(100000, 100000), "100,000 ele, 100,000 range");
-SortBench(
-  createRandomArray(1000000, 10000),
-  "1,000,000 ele, 10,000 range",
-);
-SortBench(
-  createRandomArray(1000000, 1000000),
-  "1,000,000 ele, 1,000,000 range",
-);
+for (let i = 0; i < data.length; ++i) {
+  console.log(data[i])
+  SortBench(data[i]);
+}

@@ -40,6 +40,5 @@ const SortBench = ({arr, group}: {arr: number[], group: string;}) => {
 const data = JSON.parse(a.readDataFile()) as SortData[];
 
 for (let i = 0; i < data.length; ++i) {
-  console.log(data[i])
   SortBench(data[i]);
 }

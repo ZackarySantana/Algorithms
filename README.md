@@ -48,10 +48,10 @@ Runs all benchmarks and ouputs it to `benchmark_results_2`
 ./benchmark.sh -o benchmark_results_2
 ```
 
-Runs all benchmarks using the data file `datafile.json`
+Runs all benchmarks using the data file `datafile.json` (it will search for it in {algorithm}/benchmarks)
 ```bash
 ./benchmark.sh -n datafile.json
 ```
 
-
 ## cdata.sh
+

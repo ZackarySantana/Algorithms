@@ -5,7 +5,7 @@ typescript=0
 java=0
 
 data_filename="data.json"
-output_folder="benchmark_results"
+output="benchmark_results"
 
 options=""
 
@@ -14,7 +14,7 @@ if [[ $0 == *"test"* ]]; then
 elif [[ $0 == *"benchmark"* ]]; then
     options=":l:n:o:"
 elif [[ $0 == *"cdata"* ]]; then
-    options=":n:"
+    options=":o:"
 fi
 
 while getopts $options opt; do
@@ -35,16 +35,16 @@ while getopts $options opt; do
             done
         ;;
         n)
-            if [[ $0 == *"benchmark"* ]]; then
-                echo -e "${YELLOW}Using data file: '$OPTARG'${RESET}"
-            elif [[ $0 == *"cdata"* ]]; then
-                echo -e "${YELLOW}Printing to data file: '$OPTARG'${RESET}"
-            fi
+            echo -e "${YELLOW}Using data file: '$OPTARG'${RESET}"
             data_filename=$OPTARG
         ;;
         o)
-            echo -e "${YELLOW}Outputting to folder: '$OPTARG'${RESET}"
-            output_folder=$OPTARG
+            if [[ $0 == *"benchmark"* ]]; then
+                echo -e "${YELLOW}Outputting to folder: '$OPTARG'${RESET}"
+            elif [[ $0 == *"cdata"* ]]; then
+                echo -e "${YELLOW}Printing to data file: '$OPTARG'${RESET}"
+            fi
+            output=$OPTARG
         ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2

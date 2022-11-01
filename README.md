@@ -55,3 +55,19 @@ Runs all benchmarks using the data file `datafile.json` (it will search for it i
 
 ## cdata.sh
 
+The `cdata.sh` file runs the `cdata.ts` files to create `data.json` files so benchmarks can be created using the same data. The `data.json` will be saved via source control but if you want to make your own samples you can do so using this command. Here are some example usage:
+
+Creates a data.json for all algorithms
+```bash
+./cdata.sh
+```
+
+Creates a data.json for coinchange and integerfactorization
+```bash
+./cdata.sh coinchange integerfactorization
+```
+
+Creates a *test.json* for all algorithms
+```bash
+./cdata.sh -o test.json
+```

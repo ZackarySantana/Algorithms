@@ -58,6 +58,23 @@ type Node<T> = {
 
 export type { Edge, Graph, Node, Vertex };
 
+// Writing and reading data
+
+import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
+
+export function writeFile(filePath: string, o: unknown) {
+  const mainModuleDir = path.dirname(path.fromFileUrl(Deno.mainModule));
+  Deno.chdir(mainModuleDir);
+
+  Deno.writeTextFileSync(filePath, JSON.stringify(o));
+}
+
+// Misc
+
+export function numberWithCommas(x: number) {
+  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+
 // Deno
 
 export * from "https://deno.land/std@0.160.0/testing/asserts.ts";

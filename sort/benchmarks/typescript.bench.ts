@@ -45,6 +45,9 @@ const createRandomArray = (size: number, range: number) => {
   return arr;
 };
 
+// const text = await Deno.readTextFile("./data.json");
+// console.log(JSON.parse(text));
+
 SortBench(createRandomArray(10, 5), "10 ele, 5 range");
 SortBench(createRandomArray(1000, 100), "1000 ele, 100 range");
 SortBench(createRandomArray(100000, 10000), "100,000 ele, 10,000 range");

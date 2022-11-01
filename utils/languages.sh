@@ -4,7 +4,9 @@ all=1
 typescript=0
 java=0
 
-while getopts ":l:" opt; do
+data_filename="data.json"
+
+while getopts ":l:n:" opt; do
     case $opt in
         l)
             echo -e "${YELLOW}Only testing languages: '$OPTARG'${RESET}"
@@ -16,6 +18,10 @@ while getopts ":l:" opt; do
                     java=1
                 fi
             done
+        ;;
+        n)
+            echo -e "${YELLOW}Printing to file: '$OPTARG'${RESET}"
+            data_filename=$OPTARG
         ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2

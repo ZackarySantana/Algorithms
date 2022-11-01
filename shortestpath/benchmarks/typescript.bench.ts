@@ -1,5 +1,4 @@
 // 13. Bellman Ford & 14. Dijkstra
-;
 import * as a from "../../utils/utils.ts";
 
 const ShortestPathBench = (graph: a.Graph, group: string) => {

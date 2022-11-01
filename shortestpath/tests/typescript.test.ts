@@ -32,39 +32,39 @@ const fullTree = {
 // Bellman Ford Algorithm
 
 Deno.test(function bellmanford() {
-    const { distances, previous } = lib.bellmanford(fullTree, a);
-  
-    lib.assertEquals(distances["a"], 0);
-    lib.assertEquals(distances["b"], 3);
-    lib.assertEquals(distances["c"], 4);
-    lib.assertEquals(distances["d"], 3);
-    lib.assertEquals(distances["e"], 9);
-    lib.assertEquals(distances["f"], 6);
-  
-    lib.assertEquals(previous["a"], "a"); // a (0)
-    lib.assertEquals(previous["b"], "a"); // a -> b (3)
-    lib.assertEquals(previous["c"], "b"); // a -> b -> c (3 + 1)
-    lib.assertEquals(previous["d"], "a"); // a -> d (3)
-    lib.assertEquals(previous["e"], "b"); // a -> b -> e (3 + 6)
-    lib.assertEquals(previous["f"], "c"); // a -> b -> c -> f (3 + 1 + 2)
-  });
-  
-  // Dijkstra Algorithm
-  
-  Deno.test(function dijkstra() {
-    const { distances, previous } = lib.dijkstra(fullTree, a);
-  
-    lib.assertEquals(distances["a"], 0);
-    lib.assertEquals(distances["b"], 3);
-    lib.assertEquals(distances["c"], 4);
-    lib.assertEquals(distances["d"], 3);
-    lib.assertEquals(distances["e"], 9);
-    lib.assertEquals(distances["f"], 6);
-  
-    lib.assertEquals(previous["a"], "a"); // a (0)
-    lib.assertEquals(previous["b"], "a"); // a -> b (3)
-    lib.assertEquals(previous["c"], "b"); // a -> b -> c (3 + 1)
-    lib.assertEquals(previous["d"], "a"); // a -> d (3)
-    lib.assertEquals(previous["e"], "b"); // a -> b -> e (3 + 6)
-    lib.assertEquals(previous["f"], "c"); // a -> b -> c -> f (3 + 1 + 2)
-  });
+  const { distances, previous } = lib.bellmanford(fullTree, a);
+
+  lib.assertEquals(distances["a"], 0);
+  lib.assertEquals(distances["b"], 3);
+  lib.assertEquals(distances["c"], 4);
+  lib.assertEquals(distances["d"], 3);
+  lib.assertEquals(distances["e"], 9);
+  lib.assertEquals(distances["f"], 6);
+
+  lib.assertEquals(previous["a"], "a"); // a (0)
+  lib.assertEquals(previous["b"], "a"); // a -> b (3)
+  lib.assertEquals(previous["c"], "b"); // a -> b -> c (3 + 1)
+  lib.assertEquals(previous["d"], "a"); // a -> d (3)
+  lib.assertEquals(previous["e"], "b"); // a -> b -> e (3 + 6)
+  lib.assertEquals(previous["f"], "c"); // a -> b -> c -> f (3 + 1 + 2)
+});
+
+// Dijkstra Algorithm
+
+Deno.test(function dijkstra() {
+  const { distances, previous } = lib.dijkstra(fullTree, a);
+
+  lib.assertEquals(distances["a"], 0);
+  lib.assertEquals(distances["b"], 3);
+  lib.assertEquals(distances["c"], 4);
+  lib.assertEquals(distances["d"], 3);
+  lib.assertEquals(distances["e"], 9);
+  lib.assertEquals(distances["f"], 6);
+
+  lib.assertEquals(previous["a"], "a"); // a (0)
+  lib.assertEquals(previous["b"], "a"); // a -> b (3)
+  lib.assertEquals(previous["c"], "b"); // a -> b -> c (3 + 1)
+  lib.assertEquals(previous["d"], "a"); // a -> d (3)
+  lib.assertEquals(previous["e"], "b"); // a -> b -> e (3 + 6)
+  lib.assertEquals(previous["f"], "c"); // a -> b -> c -> f (3 + 1 + 2)
+});

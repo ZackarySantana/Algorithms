@@ -46,13 +46,13 @@ Deno.test(function kruskal() {
 // Prim’s Algorithm
 
 Deno.test(function prim() {
-    const solution = lib.prim(fullTree);
-  
-    for (const edge of solution.edges) {
-      lib.assertEquals(minimumSpanningTree.edges.includes(edge), true);
-    }
-  
-    for (const vertex of solution.vertexes) {
-      lib.assertEquals(minimumSpanningTree.vertexes.includes(vertex), true);
-    }
-  });
+  const solution = lib.prim(fullTree);
+
+  for (const edge of solution.edges) {
+    lib.assertEquals(minimumSpanningTree.edges.includes(edge), true);
+  }
+
+  for (const vertex of solution.vertexes) {
+    lib.assertEquals(minimumSpanningTree.vertexes.includes(vertex), true);
+  }
+});

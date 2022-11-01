@@ -6,13 +6,14 @@ java=0
 
 data_filename="data.json"
 output="benchmark_results"
+output_to_console=0
 
 options=""
 
 if [[ $0 == *"test"* ]]; then
     options=":l:"
 elif [[ $0 == *"benchmark"* ]]; then
-    options=":l:n:o:"
+    options=":l:n:o:c"
 elif [[ $0 == *"cdata"* ]]; then
     options=":o:"
 fi
@@ -45,6 +46,9 @@ while getopts $options opt; do
                 echo -e "${YELLOW}Printing to data file: '$OPTARG'${RESET}"
             fi
             output=$OPTARG
+        ;;
+        c)
+            output_to_console=1
         ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2

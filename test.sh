@@ -23,10 +23,10 @@ function tests {
     do
         if [[ " ${types[*]} " =~ " ${test} " ]]; then
             if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
-                run_test "Typescript" "${test}" "deno test ${test}/tests -- $data_filename" "failed"
+                run_test "Typescript" "${test}" "deno test ${test}/tests" "failed"
             fi
         else
-            echo -e "${RED}NOT FOUND: Skipping ${test}.${RESET}"
+            echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}"
         fi
     done
 }

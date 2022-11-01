@@ -18,7 +18,7 @@ function cdata {
                 run_cdata "${benchmark}"
             fi
         else
-            echo -e "${RED}NOT FOUND: Skipping ${benchmark}.${RESET}"
+            echo -e "${RED}NOT FOUND \"${benchmark}\": Skipping${RESET}"
         fi
     done
 }

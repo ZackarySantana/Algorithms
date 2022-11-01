@@ -7,9 +7,9 @@ source utils/languages.sh
 function run_benchmark {
     echo -e "${YELLOW}Running $1 ${RESET}${2}${YELLOW} benchmarks${RESET}"
     benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g")
-    mkdir -p ${benchmark_dir}/${1,,}
-    echo "${benchmark_results}" > "${benchmark_dir}/${1,,}/${2,,}.log"
-    echo -e "${GREEN}Finished ${1} benchmarks (inside ${benchmark_dir}/${1})${RESET}"
+    mkdir -p ${output_folder}/${1,,}
+    echo "${benchmark_results}" > "${output_folder}/${1,,}/${2,,}.log"
+    echo -e "${GREEN}Finished ${1} benchmarks (inside ${output_folder}/${1})${RESET}"
 }
 
 function benchmarks {
@@ -17,10 +17,14 @@ function benchmarks {
     do
         if [[ " ${types[*]} " =~ " ${benchmark} " ]]; then
             if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
-                run_benchmark "Typescript" "${benchmark}" "deno bench --unstable ${benchmark}/benchmarks"
+                if [ -f "${benchmark}/benchmarks/${data_filename}" ]; then
+                    run_benchmark "Typescript" "${benchmark}" "deno bench --unstable --allow-read ${benchmark}/benchmarks -- $data_filename"
+                else
+                    echo -e "${RED}NOT FOUND DATA FILE \"${benchmark}/benchmarks/${data_filename}\": Skipping${RESET}"
+                fi
             fi
         else
-            echo -e "${RED}NOT FOUND: Skipping ${benchmark}.${RESET}"
+            echo -e "${RED}NOT FOUND \"${benchmark}\": Skipping${RESET}"
         fi
     done
 }

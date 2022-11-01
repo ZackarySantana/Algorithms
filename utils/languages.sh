@@ -5,11 +5,26 @@ typescript=0
 java=0
 
 data_filename="data.json"
+output_folder="benchmark_results"
 
-while getopts ":l:n:" opt; do
+options=""
+
+if [[ $0 == *"test"* ]]; then
+    options=":l:"
+elif [[ $0 == *"benchmark"* ]]; then
+    options=":l:n:o:"
+elif [[ $0 == *"cdata"* ]]; then
+    options=":n:"
+fi
+
+while getopts $options opt; do
     case $opt in
         l)
-            echo -e "${YELLOW}Only testing languages: '$OPTARG'${RESET}"
+            if [[ $0 == *"test"* ]]; then
+                echo -e "${YELLOW}Only testing with languages: '$OPTARG'${RESET}"
+            elif [[ $0 == *"benchmark"* ]]; then
+                echo -e "${YELLOW}Only benchmarking with languages: '$OPTARG'${RESET}"
+            fi
             all=0
             for i in $OPTARG; do
                 if [ ${i,,} = "typescript" ]; then
@@ -20,8 +35,16 @@ while getopts ":l:n:" opt; do
             done
         ;;
         n)
-            echo -e "${YELLOW}Using file: '$OPTARG'${RESET}"
+            if [[ $0 == *"benchmark"* ]]; then
+                echo -e "${YELLOW}Using data file: '$OPTARG'${RESET}"
+            elif [[ $0 == *"cdata"* ]]; then
+                echo -e "${YELLOW}Printing to data file: '$OPTARG'${RESET}"
+            fi
             data_filename=$OPTARG
+        ;;
+        o)
+            echo -e "${YELLOW}Outputting to folder: '$OPTARG'${RESET}"
+            output_folder=$OPTARG
         ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2

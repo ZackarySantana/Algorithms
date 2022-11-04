@@ -6,7 +6,7 @@ source utils/languages.sh
 # run_test ${Language} ${Test name} ${Test command} ${Failed keyword}
 function run_test {
     echo -e "${YELLOW}Running $1 ${RESET}$2${YELLOW} tests${RESET}"
-    if test_results=$($3) ; then
+    if test_results=$($3 2>&1) ; then
         # Succeeded
         if [ $verbose -eq 1 ]; then
             echo "${test_results}"
@@ -17,7 +17,7 @@ function run_test {
         echo -e ${line}
         echo -e "$test_results" | grep -C 6 -i --group-separator=$'\n\033[1;34m==============================\033[0;0m\n' $4
         echo -e "${line}"
-        echo -e "${RED}$1 ${RESET}$2${RED} test failed ${RESET}"
+        echo -e "${RED}$1 ${RESET}$2${RED} test failed${RESET}"
     fi
 }
 
@@ -29,10 +29,14 @@ function tests {
                 run_test "Typescript" "${test}" "deno test ${test}/tests" "failed"
             fi
             if [ $all -eq 1 ] || [ $java -eq 1 ]; then
-                java_files="find ${test} -name "*.java""
+            java_files="find ${test} -name "*.java""
                 if [ -n "$($java_files)" ]; then
-                    $java_files | xargs javac 
-                    run_test "Java" "${test}" "java ${test}.tests.Java" "failed"
+                    if java_compile=$($java_files | xargs javac 2>&1); then
+                        run_test "Java" "${test}" "java ${test}.tests.Java" "failed"
+                    else
+                        echo "${java_compile}"
+                        echo -e "${RED}Java ${RESET}${test}${RED} compile failed${RESET}"
+                    fi
                 else
                     echo -e "${RED}NOT FOUND \"${test}.tests.Java\": Skipping${RESET}"
                 fi

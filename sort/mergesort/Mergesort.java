@@ -3,19 +3,23 @@ package sort.mergesort;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Mergesort<T> {
+import sort.tests.Java.Sort;
+
+public class Mergesort<T> extends Sort<T> {
 
     private final Comparator<T> _COMPARE;
 
     public Mergesort(Comparator<T> compare) {
+        super(compare);
         this._COMPARE = compare;
     }
 
-    public T[] Mergesort(T[] arr) {
-        return mergesort_helper(Arrays.copyOf(arr, arr.length));
+    @Override
+    public T[] Sort(T[] arr) {
+        return mergesort(Arrays.copyOf(arr, arr.length));
     }
 
-    private T[] mergesort_helper(T[] arr) {
+    private T[] mergesort(T[] arr) {
         if (arr.length < 2) {
             return arr;
         }
@@ -23,8 +27,8 @@ public class Mergesort<T> {
         int middle = arr.length / 2;
 
         return merge(
-            mergesort_helper(Arrays.copyOfRange(arr, 0, middle)),
-            mergesort_helper(Arrays.copyOfRange(arr, middle, arr.length)),
+            mergesort(Arrays.copyOfRange(arr, 0, middle)),
+            mergesort(Arrays.copyOfRange(arr, middle, arr.length)),
             arr
         );
     }

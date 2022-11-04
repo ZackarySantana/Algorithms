@@ -7,7 +7,7 @@ source utils/languages.sh
 function run_benchmark {
     if [ $output_to_console -eq 0 ]; then
         echo -e "${YELLOW}Running $1 ${RESET}${2}${YELLOW} benchmarks${RESET}"
-        benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g")
+        benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g" 2>&1)
         mkdir -p ${output}/${1,,}
         echo "${benchmark_results}" > "${output}/${1,,}/${2,,}.log"
         echo -e "${GREEN}Finished ${1} benchmarks (inside ${output}/${1})${RESET}"

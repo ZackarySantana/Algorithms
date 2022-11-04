@@ -21,39 +21,49 @@ function run_test {
     fi
 }
 
+function file_exists {
+    if [ -f "${1}" ]; then
+        return 0
+    else
+        echo -e "${RED}NOT FOUND \"${1}\": Skipping${RESET}\n"
+        return 1
+    fi
+}
+
+function compile {
+    if compile_text=$(${1} 2>&1); then
+        return 0
+    else
+        echo "${java_compile}"
+        echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"
+        return 1
+    fi
+}
+
 function typescript_test {
     if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
-        if [ -f "${1}/tests/typescript.test.ts" ]; then
+        if file_exists "${1}/tests/typescript.test.ts"; then
             run_test "Typescript" "${1}" "deno test ${1}/tests" "failed"
-        else
-             echo -e "${RED}NOT FOUND \"${1}/tests/typescript.test.ts\": Skipping${RESET}\n"
         fi
     fi
 }
 
 function java_test {
     if [ $all -eq 1 ] || [ $java -eq 1 ]; then
-        if [ -f "${1}/tests/Java.java" ]; then
-            if java_compile=$(javac ${1}/tests/Java.java 2>&1); then
+        if file_exists "${1}/tests/Java.java"; then
+            if compile "javac ${1}/tests/Java.java"; then
                 run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
                 class_files="find ${1} -name "*.class""
                 $class_files | xargs rm -f
-            else
-                echo "${java_compile}"
-                echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"
             fi
-        else
-            echo -e "${RED}NOT FOUND \"${1}/tests/Java.java\": Skipping${RESET}\n"
         fi
     fi
 }
 
 function fsharp_test {
     if [ $all -eq 1 ] || [ $fsharp -eq 1 ]; then
-        if [ -f "${1}/tests/f#.test.fsx" ]; then
+        if file_exists "${1}/tests/f#.test.fsx"; then
             run_test "F#" "${test}" "dotnet fsi ${test}/tests/f#.test.fsx" "failed"
-        else
-            echo -e "${RED}NOT FOUND \"${1}/tests/f#.test.fsx\": Skipping${RESET}\n"
         fi
     fi
 }

@@ -5,7 +5,7 @@ import { SortData } from "./cdata.ts";
 
 const asc = (a: number, b: number) => a - b;
 
-const SortBench = ({arr, group}: {arr: number[], group: string;}) => {
+const SortBench = ({ arr, group }: { arr: number[]; group: string }) => {
   Deno.bench(
     "Standard Library - " + group,
     { group: "Sorting " + group },

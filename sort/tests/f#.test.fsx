@@ -1,9 +1,6 @@
 #load "../../utils/utils.fsx"
 open Utils
 
-#load "../mergesort/f#.fsx"
-open Mergesort
-
 let runSortTest name sortAlgo sortAlgoDesc =
     printfn "%s:" name
     do (
@@ -21,8 +18,10 @@ let runSortTest name sortAlgo sortAlgoDesc =
         test ("empty") (sortAlgo org) (List.sort org)
     )
 
-runSortTest "mergesort" mergesortAsc mergesortDesc
+#load "../mergesort/f#.fsx"
+open Mergesort
 
+runSortTest "mergesort" mergesortAsc mergesortDesc
 
 #load "../selectionsort/f#.fsx"
 open Selectionsort

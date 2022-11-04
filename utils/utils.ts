@@ -74,9 +74,11 @@ export function writeDataFile(o: unknown) {
 }
 
 export function readDataFile() {
-  const mainModuleDir = path.resolve(path.dirname(path.fromFileUrl(Deno.mainModule)));
+  const mainModuleDir = path.resolve(
+    path.dirname(path.fromFileUrl(Deno.mainModule)),
+  );
   Deno.chdir(mainModuleDir);
-  return Deno.readTextFileSync(getDataFileName())
+  return Deno.readTextFileSync(getDataFileName());
 }
 
 // Misc

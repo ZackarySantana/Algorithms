@@ -3,7 +3,7 @@ import { numberWithCommas, writeDataFile } from "../../utils/utils.ts";
 export type SortData = {
   group: string;
   arr: number[];
-}
+};
 
 const createRandomDataEntry = (size: number, range: number) => {
   const arr = [] as number[];

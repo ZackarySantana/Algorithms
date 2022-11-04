@@ -5,19 +5,20 @@ open Utils
 open Mergesort
 
 let runSortTest name sortAlgo sortAlgoDesc =
+    printfn "%s:" name
     do (
         let org = [3; 5; 2; 7; 15; 0; 2; 8; 4]
-        test (name + " asc") (sortAlgo org) (List.sort org)
+        test ("asc") (sortAlgo org) (List.sort org)
     )
 
     do (
         let org = [3; 5; 2; 7; 15; 0; 2; 8; 4]
-        test (name + " desc") (sortAlgoDesc org) (List.sortDescending org)
+        test ("desc") (sortAlgoDesc org) (List.sortDescending org)
     )
 
     do (
         let org = []
-        test (name + " empty") (sortAlgo org) (List.sort org)
+        test ("empty") (sortAlgo org) (List.sort org)
     )
 
 runSortTest "mergesort" mergesortAsc mergesortDesc

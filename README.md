@@ -2,8 +2,15 @@
 
 This is Zackary Santana's personal repository of different algorithms with tests + benchmarks for each.
 
-Currently the following languages have been used to amke the algorithms
+Currently the following languages are supported
 - TypeScript
+
+These languages are being added
+- F# (or fsharp)
+- Java
+
+These languages are planned
+- Dart
 
 ## test.sh
 

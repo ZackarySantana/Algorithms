@@ -3,6 +3,7 @@
 all=1
 typescript=0
 java=0
+fsharp=0
 
 data_filename="data.json"
 output="benchmark_results"
@@ -33,6 +34,8 @@ while getopts $options opt; do
                     typescript=1
                 elif [ ${i,,} = "java" ]; then
                     java=1
+                elif [ ${i,,} = "fsharp" ] || [ ${i,,} = "f#" ]; then
+                    fsharp=1
                 fi
             done
         ;;

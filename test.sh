@@ -21,26 +21,53 @@ function run_test {
     fi
 }
 
+function typescript_test {
+    if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
+        if [ -f "${1}/tests/typescript.test.ts" ]; then
+            run_test "Typescript" "${1}" "deno test ${1}/tests" "failed"
+        else
+             echo -e "${RED}NOT FOUND \"${1}/tests/typescript.test.ts\": Skipping${RESET}\n"
+        fi
+    fi
+}
+
+function java_test {
+    if [ $all -eq 1 ] || [ $java -eq 1 ]; then
+        java_files="find ${1} -name "*.java""
+        if [ -n "$($java_files)" ]; then
+            if [ -f "${1}/tests/Java.java" ]; then
+                if java_compile=$($java_files | xargs javac 2>&1); then
+                    run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
+                else
+                    echo "${java_compile}"
+                    echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"
+                fi
+            else
+                echo -e "${RED}NOT FOUND \"${1}/tests/Java.java\": Skipping${RESET}\n"
+            fi
+        else
+            echo -e "${RED}NOT FOUND \"any .java in ${1}\": Skipping${RESET}\n"
+        fi
+    fi
+}
+
+function fsharp_test {
+    if [ $all -eq 1 ] || [ $fsharp -eq 1 ]; then
+        if [ -f "${1}/tests/f#.test.fsx" ]; then
+            run_test "F#" "${test}" "dotnet fsi ${test}/tests/f#.test.fsx" "failed"
+        else
+            echo -e "${RED}NOT FOUND \"${1}/tests/f#.test.fsx\": Skipping${RESET}\n"
+        fi
+    fi
+}
+
 function tests {
     for test in "$@" 
     do
         if [[ " ${types[*]} " =~ " ${test} " ]]; then
-            if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
-                run_test "Typescript" "${test}" "deno test ${test}/tests" "failed"
-            fi
-            if [ $all -eq 1 ] || [ $java -eq 1 ]; then
-            java_files="find ${test} -name "*.java""
-                if [ -n "$($java_files)" ]; then
-                    if java_compile=$($java_files | xargs javac 2>&1); then
-                        run_test "Java" "${test}" "java ${test}.tests.Java" "failed"
-                    else
-                        echo "${java_compile}"
-                        echo -e "${RED}Java ${RESET}${test}${RED} compile failed${RESET}\n"
-                    fi
-                else
-                    echo -e "${RED}NOT FOUND \"${test}.tests.Java\": Skipping${RESET}\n"
-                fi
-            fi
+            typescript_test $test
+            java_test $test
+            fsharp_test $test
         else
             echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}\n"
         fi

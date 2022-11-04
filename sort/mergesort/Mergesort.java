@@ -7,11 +7,8 @@ import sort.tests.Java.Sort;
 
 public class Mergesort<T> extends Sort<T> {
 
-    private final Comparator<T> _COMPARE;
-
     public Mergesort(Comparator<T> compare) {
         super(compare);
-        this._COMPARE = compare;
     }
 
     @Override

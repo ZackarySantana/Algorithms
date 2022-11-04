@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import sort.mergesort.Mergesort;
+import sort.selectionsort.Selectionsort;
 
 public class Java {
  
@@ -21,6 +22,10 @@ public class Java {
         Mergesort<Integer> ms_asc = new Mergesort<>(this._ASC);
         Mergesort<Integer> ms_desc = new Mergesort<>(this._DESC);
         TestSuite("mergesort", ms_asc, ms_desc);
+
+        Selectionsort<Integer> ss_asc = new Selectionsort<>(this._ASC);
+        Selectionsort<Integer> ss_desc = new Selectionsort<>(this._DESC);
+        TestSuite("selectionsort", ss_asc, ss_desc);
 
         if (failed) {
             System.exit(1);
@@ -43,6 +48,8 @@ public class Java {
         for (int i = 0; i < expected.length; ++i) {
             if (sorted[i] != expected[i]) {
                 Print(testName + " failed");
+                Print("expected " + Arrays.toString(expected), 2);
+                Print("actual " + Arrays.toString(sorted), 2);
                 this.failed = true;
                 return;
             }
@@ -57,12 +64,20 @@ public class Java {
     }
 
     public void Print(String toPrint) {
-        System.out.println("  " + toPrint);
+        Print(toPrint, 1);
+    }
+
+    public void Print(String toPrint, int tabs) {
+        StringBuilder spaces = new StringBuilder();
+        for (int i = 0; i < tabs; ++i) {
+            spaces.append("  ");
+        }
+        System.out.println(spaces.toString() + toPrint);
     }
 
     public static abstract class Sort<T> {
 
-        private final Comparator<T> _COMPARE;
+        protected final Comparator<T> _COMPARE;
 
         public Sort(Comparator<T> compare) {
             this._COMPARE = compare;

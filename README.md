@@ -11,6 +11,7 @@ The `test.sh` file runs tests for the algorithms across languages, with specific
 
 Options:
 -l "lanaguages here" : Specifies languages
+-v : Verbose, will output test results always regardless pass or fail
 
 Here are some example usage:
 
@@ -22,6 +23,11 @@ Runs all tests for all algorithms for all languages
 Runs all tests for all algorithsm for only TypeScript and Java (case insensitive)
 ```bash
 ./test.sh -l "typescript java"
+```
+
+Runs all tests for all algorithsm for only TypeScript and Java (case insensitive) and outputs their test results (verbose)
+```bash
+./test.sh -l "typescript java" -v
 ```
 
 Runs all tests for the sort and eggdrop algorithms for only TypeScript (case insensitive)

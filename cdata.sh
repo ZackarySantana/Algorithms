@@ -15,7 +15,7 @@ function cdata {
     do
         if [[ " ${types[*]} " =~ " ${benchmark} " ]]; then
             if [ -f "${benchmark}/benchmarks/cdata.ts" ]; then
-                if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
+                if [ $typescript -eq 1 ]; then
                     run_cdata "${benchmark}" "deno run --allow-read --allow-write ${1,,}/benchmarks/cdata.ts $output"
                 fi
             else

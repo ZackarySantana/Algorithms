@@ -31,17 +31,17 @@ function file_exists {
 }
 
 function compile {
-    if compile_text=$(${1} 2>&1); then
+    if compile_text=$(${2} 2>&1); then
         return 0
     else
         echo "${java_compile}"
-        echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"
+        echo -e "${RED}${1} ${RESET}${2}${RED} compile failed${RESET}\n"
         return 1
     fi
 }
 
 function typescript_test {
-    if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
+    if [ $typescript -eq 1 ]; then
         if file_exists "${1}/tests/typescript.test.ts"; then
             run_test "Typescript" "${1}" "deno test ${1}/tests" "failed"
         fi
@@ -49,19 +49,18 @@ function typescript_test {
 }
 
 function java_test {
-    if [ $all -eq 1 ] || [ $java -eq 1 ]; then
+    if [ $java -eq 1 ]; then
         if file_exists "${1}/tests/Java.java"; then
-            if compile "javac ${1}/tests/Java.java"; then
+            if compile "Java" "javac ${1}/tests/Java.java"; then
                 run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
-                class_files="find ${1} -name "*.class""
-                $class_files | xargs rm -f
+                find ${1} -name "*.class" | xargs rm -f
             fi
         fi
     fi
 }
 
 function fsharp_test {
-    if [ $all -eq 1 ] || [ $fsharp -eq 1 ]; then
+    if [ $fsharp -eq 1 ]; then
         if file_exists "${1}/tests/f#.test.fsx"; then
             run_test "F#" "${test}" "dotnet fsi ${test}/tests/f#.test.fsx" "failed"
         fi

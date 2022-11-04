@@ -1,9 +1,8 @@
 #!/bin/bash
 
-all=1
-typescript=0
-java=0
-fsharp=0
+typescript=1
+java=1
+fsharp=1
 
 data_filename="data.json"
 output="benchmark_results"
@@ -23,7 +22,9 @@ fi
 while getopts $options opt; do
     case $opt in
         l)
-            all=0
+            typescript=0
+            java=0
+            fsharp=0
             for i in $OPTARG; do
                 if [ ${i,,} = "typescript" ] || [ ${i,,} = "ts" ]; then
                     typescript=1

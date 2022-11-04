@@ -21,7 +21,7 @@ function benchmarks {
     do
         if [[ " ${types[*]} " =~ " ${benchmark} " ]]; then
             if [ -f "${benchmark}/benchmarks/${data_filename}" ]; then
-                if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
+                if [ $typescript -eq 1 ]; then
                     run_benchmark "Typescript" "${benchmark}" "deno bench --unstable --allow-read ${benchmark}/benchmarks -- $data_filename"
                 fi
             else

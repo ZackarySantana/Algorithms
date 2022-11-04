@@ -38,6 +38,8 @@ function java_test {
             if [ -f "${1}/tests/Java.java" ]; then
                 if java_compile=$($java_files | xargs javac 2>&1); then
                     run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
+                    class_files="find ${1} -name "*.class""
+                    $class_files | xargs rm -f
                 else
                     echo "${java_compile}"
                     echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"

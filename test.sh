@@ -33,22 +33,17 @@ function typescript_test {
 
 function java_test {
     if [ $all -eq 1 ] || [ $java -eq 1 ]; then
-        java_files="find ${1} -name "*.java""
-        if [ -n "$($java_files)" ]; then
-            if [ -f "${1}/tests/Java.java" ]; then
-                if java_compile=$($java_files | xargs javac 2>&1); then
-                    run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
-                    class_files="find ${1} -name "*.class""
-                    $class_files | xargs rm -f
-                else
-                    echo "${java_compile}"
-                    echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"
-                fi
+        if [ -f "${1}/tests/Java.java" ]; then
+            if java_compile=$(javac ${1}/tests/Java.java 2>&1); then
+                run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
+                class_files="find ${1} -name "*.class""
+                $class_files | xargs rm -f
             else
-                echo -e "${RED}NOT FOUND \"${1}/tests/Java.java\": Skipping${RESET}\n"
+                echo "${java_compile}"
+                echo -e "${RED}Java ${RESET}${1}${RED} compile failed${RESET}\n"
             fi
         else
-            echo -e "${RED}NOT FOUND \"any .java in ${1}\": Skipping${RESET}\n"
+            echo -e "${RED}NOT FOUND \"${1}/tests/Java.java\": Skipping${RESET}\n"
         fi
     fi
 }

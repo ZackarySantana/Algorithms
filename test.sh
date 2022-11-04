@@ -17,7 +17,7 @@ function run_test {
         echo -e ${line}
         echo -e "$test_results" | grep -C 6 -i --group-separator=$'\n\033[1;34m==============================\033[0;0m\n' $4
         echo -e "${line}"
-        echo -e "${RED}$1 ${RESET}$2${RED} test failed${RESET}"
+        echo -e "${RED}$1 ${RESET}$2${RED} test failed${RESET}\n"
     fi
 }
 
@@ -35,14 +35,14 @@ function tests {
                         run_test "Java" "${test}" "java ${test}.tests.Java" "failed"
                     else
                         echo "${java_compile}"
-                        echo -e "${RED}Java ${RESET}${test}${RED} compile failed${RESET}"
+                        echo -e "${RED}Java ${RESET}${test}${RED} compile failed${RESET}\n"
                     fi
                 else
-                    echo -e "${RED}NOT FOUND \"${test}.tests.Java\": Skipping${RESET}"
+                    echo -e "${RED}NOT FOUND \"${test}.tests.Java\": Skipping${RESET}\n"
                 fi
             fi
         else
-            echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}"
+            echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}\n"
         fi
     done
 }

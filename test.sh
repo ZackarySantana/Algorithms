@@ -8,6 +8,9 @@ function run_test {
     echo -e "${YELLOW}Running $1 ${RESET}$2${YELLOW} tests${RESET}"
     if test_results=$($3) ; then
         # Succeeded
+        if [ $verbose -eq 1 ]; then
+            echo "${test_results}"
+        fi
         echo -e "${GREEN}$1 ${RESET}$2${GREEN} tests passed!${RESET}\n"
     else
         # Failed
@@ -24,6 +27,15 @@ function tests {
         if [[ " ${types[*]} " =~ " ${test} " ]]; then
             if [ $all -eq 1 ] || [ $typescript -eq 1 ]; then
                 run_test "Typescript" "${test}" "deno test ${test}/tests" "failed"
+            fi
+            if [ $all -eq 1 ] || [ $java -eq 1 ]; then
+                java_files="find ${test} -name "*.java""
+                if [ -n "$($java_files)" ]; then
+                    $java_files | xargs javac 
+                    run_test "Java" "${test}" "java ${test}.tests.Java" "failed"
+                else
+                    echo -e "${RED}NOT FOUND \"${test}.tests.Java\": Skipping${RESET}"
+                fi
             fi
         else
             echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}"

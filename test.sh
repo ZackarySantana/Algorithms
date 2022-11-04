@@ -21,6 +21,7 @@ function run_test {
     fi
 }
 
+# ${File name}
 function file_exists {
     if [ -f "${1}" ]; then
         return 0
@@ -30,6 +31,7 @@ function file_exists {
     fi
 }
 
+# ${Language} ${File name}
 function compile {
     if compile_text=$(${2} 2>&1); then
         return 0
@@ -40,6 +42,7 @@ function compile {
     fi
 }
 
+# ${Test}
 function typescript_test {
     if [ $typescript -eq 1 ]; then
         if file_exists "${1}/tests/typescript.test.ts"; then
@@ -48,6 +51,7 @@ function typescript_test {
     fi
 }
 
+# ${Test}
 function java_test {
     if [ $java -eq 1 ]; then
         if file_exists "${1}/tests/Java.java"; then
@@ -59,6 +63,7 @@ function java_test {
     fi
 }
 
+# ${Test}
 function fsharp_test {
     if [ $fsharp -eq 1 ]; then
         if file_exists "${1}/tests/f#.test.fsx"; then
@@ -67,6 +72,7 @@ function fsharp_test {
     fi
 }
 
+# ${List of tests}
 function tests {
     for test in "$@" 
     do

@@ -16,6 +16,7 @@ function run_benchmark {
     fi
 }
 
+# ${List of benchmarks}
 function benchmarks {
     for benchmark in "$@" 
     do

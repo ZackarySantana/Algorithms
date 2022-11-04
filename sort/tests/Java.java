@@ -20,17 +20,20 @@ public class Java {
     public Java() {
         Mergesort<Integer> ms_asc = new Mergesort<>(this._ASC);
         Mergesort<Integer> ms_desc = new Mergesort<>(this._DESC);
-        Integer[] arr = new Integer[] { 3, 5, 2, 7, 15, 0, 2, 8, 4 };
-        {
-            System.out.println("mergesort: ");
-            Test("asc", ms_asc, this._ASC, arr);
-            Test("desc", ms_desc, this._DESC, arr);
-            Test("empty", ms_asc, this._ASC, new Integer[] {});
-        }
+        TestSuite("mergesort", ms_asc, ms_desc);
 
         if (failed) {
             System.exit(1);
         }
+    }
+
+    public void TestSuite(String algorithmName, Sort<Integer> sortAlgorithmAsc, Sort<Integer> sortAlgorithmDesc) {
+        Integer[] arr = new Integer[] { 3, 5, 2, 7, 15, 0, 2, 8, 4 };
+
+        System.out.println(algorithmName + ": ");
+        Test("asc", sortAlgorithmAsc, this._ASC, arr);
+        Test("desc", sortAlgorithmDesc, this._DESC, arr);
+        Test("empty", sortAlgorithmAsc, this._ASC, new Integer[] {});
     }
 
     public void Test(String testName, Sort<Integer> sortAlgorithm, Comparator<Integer> sortBy, Integer[] given) {

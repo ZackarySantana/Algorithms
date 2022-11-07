@@ -59,5 +59,20 @@ while getopts $options opt; do
         ;;
     esac
 done
-
 shift $(($OPTIND - 1))
+
+if ! command -v deno &> /dev/null; then 
+    typescript=0
+    echo -e "${RED}Deno cannot be found, please install it here: https://deno.land/${RESET}"
+fi
+
+if ! command -v javac &> /dev/null || ! command -v java &> /dev/null; then 
+    java=0
+    echo -e "${RED}Java cannot be found, please install it here: https://www.java.com/en/download/manual.jsp${RESET}"
+fi
+
+if ! command -v dotnet &> /dev/null; then 
+    fsharp=0
+    echo -e "${RED}Dotnet cannot be found, please install it here: https://dotnet.microsoft.com/en-us/download${RESET}"
+    echo -e "${RED}Skipping F#${RESET}"
+fi

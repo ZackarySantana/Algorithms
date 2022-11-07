@@ -11,13 +11,13 @@ function run_test {
         if [ $verbose -eq 1 ]; then
             echo "${test_results}"
         fi
-        echo -e "  ${GREEN}$1 tests passed!${RESET}"
+        echo -e "  ${GREEN}$1 passed!${RESET}"
     else
         # Failed
         echo -e "${line}"
         echo -e "$test_results" | grep -C 6 -i --group-separator=$'\n\033[1;34m==============================\033[0;0m\n' $4
         echo -e "${line}"
-        echo -e "  ${RED}$1 test failed${RESET}\n"
+        echo -e "  ${RED}$1 failed${RESET}\n"
     fi
 }
 
@@ -26,7 +26,7 @@ function file_exists {
     if [ -f "${2}" ]; then
         return 0
     else
-        echo -e "  ${RED}$1 tests failed. Not found \"${2}\"${RESET}"
+        echo -e "  ${RED}$1 failed. Not found \"${2}\"${RESET}"
         return 1
     fi
 }
@@ -37,7 +37,7 @@ function compile {
         return 0
     else
         echo "${java_compile}"
-        echo -e "  ${RED}${1} tests failed. Compile failed \"${2}\"${RESET}"
+        echo -e "  ${RED}${1} failed. Compile failed \"${2}\"${RESET}"
         return 1
     fi
 }

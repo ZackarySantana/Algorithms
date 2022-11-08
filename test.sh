@@ -5,28 +5,28 @@ source utils/languages.sh
 
 # run_test ${Language} ${Test name} ${Test command} ${Failed keyword}
 function run_test {
-    echo -e "${YELLOW}Running $1 ${RESET}$2${YELLOW} tests${RESET}"
+    # echo -e "${YELLOW}Running $1 ${RESET}$2${YELLOW} tests${RESET}"
     if test_results=$($3 2>&1) ; then
         # Succeeded
         if [ $verbose -eq 1 ]; then
             echo "${test_results}"
         fi
-        echo -e "${GREEN}$1 ${RESET}$2${GREEN} tests passed!${RESET}\n"
+        echo -e "  ${GREEN}$1 passed!${RESET}"
     else
         # Failed
-        echo -e ${line}
+        echo -e "${line}"
         echo -e "$test_results" | grep -C 6 -i --group-separator=$'\n\033[1;34m==============================\033[0;0m\n' $4
         echo -e "${line}"
-        echo -e "${RED}$1 ${RESET}$2${RED} test failed${RESET}\n"
+        echo -e "  ${RED}$1 failed${RESET}\n"
     fi
 }
 
-# ${File name}
+# ${Language} ${File name}
 function file_exists {
-    if [ -f "${1}" ]; then
+    if [ -f "${2}" ]; then
         return 0
     else
-        echo -e "${RED}NOT FOUND \"${1}\": Skipping${RESET}\n"
+        echo -e "  ${RED}$1 failed. Not found \"${2}\"${RESET}"
         return 1
     fi
 }
@@ -37,7 +37,7 @@ function compile {
         return 0
     else
         echo "${compile_text}"
-        echo -e "${RED}${1} ${RESET}${2}${RED} compile failed${RESET}\n"
+        echo -e "  ${RED}${1} failed. Compile failed \"${2}\"${RESET}"
         return 1
     fi
 }
@@ -45,7 +45,7 @@ function compile {
 # ${Test}
 function typescript_test {
     if [ $typescript -eq 1 ]; then
-        if file_exists "${1}/tests/typescript.test.ts"; then
+        if file_exists "Typescript" "${1}/tests/typescript.test.ts"; then
             run_test "Typescript" "${1}" "deno test ${1}/tests" "failed"
         fi
     fi
@@ -54,7 +54,7 @@ function typescript_test {
 # ${Test}
 function java_test {
     if [ $java -eq 1 ]; then
-        if file_exists "${1}/tests/Java.java"; then
+        if file_exists "Java" "${1}/tests/Java.java"; then
             if compile "Java" "javac ${1}/tests/Java.java"; then
                 run_test "Java" "${1}" "java ${1}.tests.Java" "failed"
                 find ${1} -name "*.class" | xargs rm -f
@@ -66,7 +66,7 @@ function java_test {
 # ${Test}
 function fsharp_test {
     if [ $fsharp -eq 1 ]; then
-        if file_exists "${1}/tests/f#.test.fsx"; then
+        if file_exists "F#" "${1}/tests/f#.test.fsx"; then
             run_test "F#" "${test}" "dotnet fsi ${test}/tests/f#.test.fsx" "failed"
         fi
     fi
@@ -77,9 +77,11 @@ function tests {
     for test in "$@" 
     do
         if [[ " ${types[*]} " =~ " ${test} " ]]; then
+            echo -e "${YELLOW}${RESET}${test}${YELLOW} tests:${RESET}"
             typescript_test $test
             java_test $test
             fsharp_test $test
+            echo ""
         else
             echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}\n"
         fi

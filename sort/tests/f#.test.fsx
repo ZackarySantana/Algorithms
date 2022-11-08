@@ -27,3 +27,8 @@ runSortTest "mergesort" mergesortAsc mergesortDesc
 open Selectionsort
 
 runSortTest "selectionsort" selectionsortAsc selectionsortDesc
+
+#load "../quicksort/f#.fsx"
+open Quicksort
+
+runSortTest "quicksort" quicksortAsc quicksortDesc

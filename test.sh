@@ -36,7 +36,7 @@ function compile {
     if compile_text=$(${2} 2>&1); then
         return 0
     else
-        echo "${java_compile}"
+        echo "${compile_text}"
         echo -e "${RED}${1} ${RESET}${2}${RED} compile failed${RESET}\n"
         return 1
     fi

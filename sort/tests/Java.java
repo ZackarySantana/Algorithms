@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import sort.mergesort.Mergesort;
 import sort.selectionsort.Selectionsort;
+import sort.quicksort.Quicksort;
 
 public class Java {
  
@@ -26,6 +27,10 @@ public class Java {
         Selectionsort<Integer> ss_asc = new Selectionsort<>(this._ASC);
         Selectionsort<Integer> ss_desc = new Selectionsort<>(this._DESC);
         TestSuite("selectionsort", ss_asc, ss_desc);
+
+        Quicksort<Integer> qs_asc = new Quicksort<>(this._ASC);
+        Quicksort<Integer> qs_desc = new Quicksort<>(this._DESC);
+        TestSuite("quicksort", ss_asc, ss_desc);
 
         if (failed) {
             System.exit(1);

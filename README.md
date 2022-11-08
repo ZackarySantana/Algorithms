@@ -24,8 +24,8 @@ test files.
 Options:
 -l "lanaguages here" : Specifies languages
 -v : Verbose, will output test results always regardless pass or fail
--e : Hides output from compile or not found errors (will still output the failed tests)
-
+-h : Hides not found tests
+-c : Hides failed compiled tests
 
 Here are some example usage:
 
@@ -59,7 +59,7 @@ insensitive)
 Runs all tests for Java and hides the ones that fail compiling or not found
 
 ```bash
-./test.sh -e -l java 
+./test.sh -hcl java 
 ```
 
 ## benchmark.sh

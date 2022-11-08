@@ -26,7 +26,7 @@ function file_exists {
     if [ -f "${2}" ]; then
         return 0
     else
-        if [ $hide_nontest_errors -eq 0 ]; then
+        if [ $hide_notfound -eq 0 ]; then
             echo -e "  ${RED}$1 failed. Not found \"${2}\"${RESET}"
         fi
         return 1
@@ -38,7 +38,7 @@ function compile {
     if compile_text=$(${2} 2>&1); then
         return 0
     else
-        if [ $hide_nontest_errors -eq 0 ]; then
+        if [ $hide_compilefailed -eq 0 ]; then
             echo "${compile_text}"
             echo -e "  ${RED}${1} failed. Compile failed \"${2}\"${RESET}"
         fi
@@ -87,7 +87,7 @@ function tests {
             fsharp_test $test
             echo ""
         else
-            if [ $hide_nontest_errors -eq 0 ]; then
+            if [ $hide_notfound -eq 0 ]; then
                 echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}\n"
             fi
         fi

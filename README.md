@@ -21,8 +21,11 @@ These languages are planned
 The `test.sh` file runs tests for the algorithms across languages, with specific
 test files.
 
-Options: -l "lanaguages here" : Specifies languages -v : Verbose, will output
-test results always regardless pass or fail
+Options:
+-l "lanaguages here" : Specifies languages
+-v : Verbose, will output test results always regardless pass or fail
+-h : Hides not found tests
+-c : Hides failed compiled tests
 
 Here are some example usage:
 
@@ -51,6 +54,12 @@ insensitive)
 
 ```bash
 ./test.sh -l "typescript" sort eggdrop
+```
+
+Runs all tests for Java and hides the ones that fail compiling or not found
+
+```bash
+./test.sh -hcl java 
 ```
 
 ## benchmark.sh

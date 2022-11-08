@@ -30,7 +30,7 @@ public class Java {
 
         Quicksort<Integer> qs_asc = new Quicksort<>(this._ASC);
         Quicksort<Integer> qs_desc = new Quicksort<>(this._DESC);
-        TestSuite("quicksort", ss_asc, ss_desc);
+        TestSuite("quicksort", qs_asc, qs_desc);
 
         if (failed) {
             System.exit(1);

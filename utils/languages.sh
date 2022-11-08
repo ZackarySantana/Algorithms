@@ -8,11 +8,12 @@ data_filename="data.json"
 output="benchmark_results"
 output_to_console=0
 verbose=0
+hide_nontest_errors=0
 
 options=""
 
 if [[ $0 == *"test"* ]]; then
-    options=":l:v"
+    options=":l:ve"
 elif [[ $0 == *"benchmark"* ]]; then
     options=":l:n:o:c"
 elif [[ $0 == *"cdata"* ]]; then
@@ -52,6 +53,9 @@ while getopts $options opt; do
         ;;
         v)
             verbose=1
+        ;;
+        e)
+            hide_nontest_errors=1
         ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2

@@ -28,11 +28,13 @@ let benchmark sourceLocation func =
             |> System.TimeSpan.FromSeconds
 
     let value = JsonValue.Load(sourceLocation + "/" + System.Environment.GetCommandLineArgs()[2])
+    let mutable benchmarks = []
     for record in value do
         let processedData = (func record)
         let benchmarkTime = benchmark processedData ()
 
-        printfn "%s %f" (record?group.AsString()) benchmarkTime.TotalSeconds
-        
-
-        ()
+        let getTime = function
+            | x when x < 0.0001 -> 0.
+            | x -> x
+        benchmarks <- List.append [(record?group.AsString(), getTime benchmarkTime.TotalSeconds)] benchmarks
+    benchmarks

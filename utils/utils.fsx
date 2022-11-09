@@ -36,5 +36,5 @@ let benchmark sourceLocation func =
         let getTime = function
             | x when x < 0.0001 -> 0.
             | x -> x
-        benchmarks <- List.append [(record?group.AsString(), getTime benchmarkTime.TotalSeconds)] benchmarks
+        benchmarks <- List.append benchmarks [(record?group.AsString(), getTime benchmarkTime.TotalSeconds)]
     benchmarks

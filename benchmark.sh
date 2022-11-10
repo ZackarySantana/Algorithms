@@ -11,7 +11,7 @@ function run_benchmark {
         benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(./bench;[0-9]\{1,2\}\)\?\)\?[mGK]//g" 2>&1)
         mkdir -p ${output_benchmark}/${1,,}
         echo "${benchmark_results}" > "${output_benchmark}/${1,,}/${2,,}.log"
-        echo -e "  ${GREEN}Finished ${1} (inside ${output_benchmark}/${1})${RESET}"
+        echo -e "  ${GREEN}Finished ${1} (inside ${output_benchmark}/${1,,})${RESET}"
     else
         $3
     fi
@@ -30,7 +30,7 @@ function typescript_benchmark {
 function fsharp_benchmark {
     if [ $fsharp -eq 1 ]; then
         if file_exists "F#" "${1}/benchmarks/f#.bench.fsx"; then
-            run_benchmark "f#" "${1}" "dotnet fsi ${1}/benchmarks/f#.bench.ts ${data_filename}"
+            run_benchmark "f#" "${1}" "dotnet fsi ${1}/benchmarks/f#.bench.fsx ${data_filename}"
         fi
     fi
 }
@@ -43,6 +43,7 @@ function benchmarks {
             if [ -f "${benchmark}/benchmarks/${data_filename}" ]; then
                 echo -e "${YELLOW}${benchmark} benchmarks:${RESET}"
                 typescript_benchmark ${benchmark}
+                fsharp_benchmark ${benchmark}
                 echo ""
             else
                 if [ $hide_notfound -eq 0 ]; then

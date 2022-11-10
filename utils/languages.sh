@@ -5,7 +5,8 @@ java=1
 fsharp=1
 
 data_filename="data.json"
-output="benchmark_results"
+output_benchmark="benchmark_results"
+output_data="data.json"
 output_to_console=0
 verbose=0
 hide_notfound=0
@@ -44,10 +45,11 @@ while getopts $options opt; do
         o)
             if [[ $0 == *"benchmark"* ]]; then
                 echo -e "${YELLOW}Outputting to folder: '$OPTARG'${RESET}"
+                output_benchmark=$OPTARG
             elif [[ $0 == *"cdata"* ]]; then
                 echo -e "${YELLOW}Printing to data file: '$OPTARG'${RESET}"
+                output_data=$OPTARG
             fi
-            output=$OPTARG
         ;;
         c)
             if [[ $0 == *"benchmark"* ]]; then

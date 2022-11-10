@@ -2,6 +2,7 @@
 
 source utils/constants.sh
 source utils/languages.sh
+source utils/utils.sh
 
 # run_test ${Language} ${Test name} ${Test command} ${Failed keyword}
 function run_test {
@@ -18,31 +19,6 @@ function run_test {
         echo -e "$test_results" | grep -C 6 -i --group-separator=$'\n\033[1;34m==============================\033[0;0m\n' $4
         echo -e "${line}"
         echo -e "  ${RED}$1 failed${RESET}\n"
-    fi
-}
-
-# ${Language} ${File name}
-function file_exists {
-    if [ -f "${2}" ]; then
-        return 0
-    else
-        if [ $hide_notfound -eq 0 ]; then
-            echo -e "  ${RED}$1 failed. Not found \"${2}\"${RESET}"
-        fi
-        return 1
-    fi
-}
-
-# ${Language} ${File name}
-function compile {
-    if compile_text=$(${2} 2>&1); then
-        return 0
-    else
-        if [ $hide_compilefailed -eq 0 ]; then
-            echo "${compile_text}"
-            echo -e "  ${RED}${1} failed. Compile failed \"${2}\"${RESET}"
-        fi
-        return 1
     fi
 }
 
@@ -88,7 +64,7 @@ function tests {
             echo ""
         else
             if [ $hide_notfound -eq 0 ]; then
-                echo -e "${RED}NOT FOUND \"${test}\": Skipping${RESET}\n"
+                echo -e "${RED}${test} failed. Test not found${RESET}\n"
             fi
         fi
     done

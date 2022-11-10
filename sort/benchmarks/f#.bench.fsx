@@ -8,7 +8,7 @@ open FSharp.Data.JsonExtensions
 open Mergesort
 
 let mergeBench = benchmark __SOURCE_DIRECTORY__ (fun record -> 
-    let nums = ((record?arr.AsArray()) |> Array.toList) |> List.map (fun x -> x.AsInteger())
+    let nums = ((record?data.AsArray()) |> Array.toList) |> List.map (fun x -> x.AsInteger())
     match nums.Length with
         | _ when nums.Length <= 100000 -> fun _ -> mergesortAsc nums
         | _ -> fun _ -> []

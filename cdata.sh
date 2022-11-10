@@ -16,7 +16,7 @@ function cdata {
         if [[ " ${types[*]} " =~ " ${benchmark} " ]]; then
             if [ -f "${benchmark}/benchmarks/cdata.ts" ]; then
                 if [ $typescript -eq 1 ]; then
-                    run_cdata "${benchmark}" "deno run --allow-read --allow-write ${1,,}/benchmarks/cdata.ts $output"
+                    run_cdata "${benchmark}" "deno run --allow-read --allow-write ${1,,}/benchmarks/cdata.ts $output_data"
                 fi
             else
                 echo -e "${RED}NOT FOUND: \"${benchmark}/benchmarks/cdata.ts\": Skipping${RESET}"

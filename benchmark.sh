@@ -8,7 +8,7 @@ source utils/utils.sh
 function run_benchmark {
     if [ $output_to_console -eq 0 ]; then
         echo -e "  ${YELLOW}Running $1${RESET}"
-        benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(./bench;[0-9]\{1,2\}\)\?\)\?[mGK]//g" 2>&1)
+        benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g" 2>&1)
         mkdir -p ${output_benchmark}/${1,,}
         echo "${benchmark_results}" > "${output_benchmark}/${1,,}/${2,,}.log"
         echo -e "  ${GREEN}Finished ${1} (inside ${output_benchmark}/${1,,})${RESET}"

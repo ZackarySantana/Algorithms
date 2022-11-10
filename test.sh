@@ -6,7 +6,6 @@ source utils/utils.sh
 
 # run_test ${Language} ${Test name} ${Test command} ${Failed keyword}
 function run_test {
-    # echo -e "${YELLOW}Running $1 ${RESET}$2${YELLOW} tests${RESET}"
     if test_results=$($3 2>&1) ; then
         # Succeeded
         if [ $verbose -eq 1 ]; then
@@ -47,7 +46,7 @@ function java_test {
 function fsharp_test {
     if [ $fsharp -eq 1 ]; then
         if file_exists "F#" "${1}/tests/f#.test.fsx"; then
-            run_test "F#" "${test}" "dotnet fsi ${test}/tests/f#.test.fsx" "failed"
+            run_test "F#" "${1}" "dotnet fsi ${1}/tests/f#.test.fsx" "failed"
         fi
     fi
 }

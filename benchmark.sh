@@ -7,11 +7,11 @@ source utils/utils.sh
 # run_benchmark ${Language} ${Benchmark name} ${Benchmark command}
 function run_benchmark {
     if [ $output_to_console -eq 0 ]; then
-        echo -e "  ${YELLOW}Running $1 ${RESET}${2}${YELLOW} benchmarks${RESET}"
-        benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(;[0-9]\{1,2\}\)\?\)\?[mGK]//g" 2>&1)
+        echo -e "  ${YELLOW}Running $1${RESET}"
+        benchmark_results=$($3 | sed "s/\x1B\[\([0-9]\{1,2\}\(./bench;[0-9]\{1,2\}\)\?\)\?[mGK]//g" 2>&1)
         mkdir -p ${output_benchmark}/${1,,}
         echo "${benchmark_results}" > "${output_benchmark}/${1,,}/${2,,}.log"
-        echo -e "  ${GREEN}Finished ${1} benchmarks (inside ${output_benchmark}/${1})${RESET}"
+        echo -e "  ${GREEN}Finished ${1} (inside ${output_benchmark}/${1})${RESET}"
     else
         $3
     fi
@@ -26,20 +26,33 @@ function typescript_benchmark {
     fi
 }
 
+# ${Benchmark}
+function fsharp_benchmark {
+    if [ $fsharp -eq 1 ]; then
+        if file_exists "F#" "${1}/benchmarks/f#.bench.fsx"; then
+            run_benchmark "f#" "${1}" "dotnet fsi ${1}/benchmarks/f#.bench.ts ${data_filename}"
+        fi
+    fi
+}
+
 # ${List of benchmarks}
 function benchmarks {
     for benchmark in "$@" 
     do
         if [[ " ${types[*]} " =~ " ${benchmark} " ]]; then
             if [ -f "${benchmark}/benchmarks/${data_filename}" ]; then
-                echo -e "${YELLOW}${benchmark} benchmarks running${RESET}"
+                echo -e "${YELLOW}${benchmark} benchmarks:${RESET}"
                 typescript_benchmark ${benchmark}
-                echo -e "${GREEN}${benchmark} benchmarks finished${RESET}"
+                echo ""
             else
-                echo -e "${RED}NOT FOUND DATA FILE \"${benchmark}/benchmarks/${data_filename}\": Skipping${RESET}"
+                if [ $hide_notfound -eq 0 ]; then
+                    echo -e "${RED}${benchmark} failed. Benchmark data file not found${RESET}\n"
+                fi
             fi
         else
-            echo -e "${RED}NOT FOUND \"${benchmark}\": Skipping${RESET}"
+            if [ $hide_notfound -eq 0 ]; then
+                echo -e "${RED}${benchmark} failed. Benchmark not found${RESET}\n"
+            fi
         fi
     done
 }

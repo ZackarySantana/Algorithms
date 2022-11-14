@@ -15,6 +15,10 @@ These languages are being added
 These languages are planned
 
 - Dart
+- Rust
+- Carbon
+- Zig
+- C++
 
 ## test.sh
 
